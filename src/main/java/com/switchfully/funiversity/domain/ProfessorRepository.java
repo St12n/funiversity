@@ -30,4 +30,8 @@ public class ProfessorRepository {
     public Collection<Professor> getAll() {
         return professorsById.values();
     }
+
+    public void deleteFromRepository(Professor professor){
+        professorsById.remove(professor);
+    }
 }

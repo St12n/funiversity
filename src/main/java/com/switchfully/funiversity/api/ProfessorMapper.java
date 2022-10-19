@@ -3,7 +3,9 @@ package com.switchfully.funiversity.api;
 import com.switchfully.funiversity.api.dtos.CreateProfessorDTO;
 import com.switchfully.funiversity.api.dtos.ProfessorDTO;
 import com.switchfully.funiversity.domain.Professor;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ProfessorMapper {
 
     public ProfessorDTO mapProfessorToDTO(Professor professor){
