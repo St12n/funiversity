@@ -4,8 +4,18 @@ import com.switchfully.funiversity.domain.Professor;
 
 public class ProfessorDTO {
 
+    private String id;
     private String firstname;
     private String lastname;
+
+    public String getId() {
+        return id;
+    }
+
+    public ProfessorDTO setId(String id) {
+        this.id = id;
+        return this;
+    }
 
     public String getFirstname() {
         return firstname;

@@ -10,6 +10,7 @@ public class ProfessorMapper {
 
     public ProfessorDTO mapProfessorToDTO(Professor professor){
         return new ProfessorDTO()
+                .setId(professor.getId())
                 .setFirstname(professor.getFirstname())
                 .setLastname(professor.getLastname());
     }

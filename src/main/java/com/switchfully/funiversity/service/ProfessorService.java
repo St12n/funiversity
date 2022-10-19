@@ -1,5 +1,6 @@
 package com.switchfully.funiversity.service;
 
+import com.switchfully.funiversity.api.ProfessorAlreadyExists;
 import com.switchfully.funiversity.api.ProfessorMapper;
 import com.switchfully.funiversity.api.dtos.CreateProfessorDTO;
 import com.switchfully.funiversity.api.dtos.ProfessorDTO;
@@ -25,6 +26,13 @@ public class ProfessorService {
     }
 
     public ProfessorDTO getProfessorDTO(CreateProfessorDTO professorToCreate) {
+        professorRepository.getAll().stream()
+                .filter(professor -> professor.getFirstname().equals(professorToCreate.getFirstname()) && professor.getLastname().equals(professorToCreate.getLastname()))
+                .findFirst()
+                .ifPresent(s ->
+                {
+                    throw new ProfessorAlreadyExists(professorToCreate.toString());
+                });
         Professor professorToSave = professorMapper.mapDtoToProfessor(professorToCreate);
         Professor savedProfessor = professorRepository.save(professorToSave);
         return professorMapper.mapProfessorToDTO(savedProfessor);
@@ -36,7 +44,7 @@ public class ProfessorService {
                 .collect(Collectors.toList());
     }
 
-    public ProfessorDTO getProfessorDTO(String id){
+    public ProfessorDTO getProfessorDTO(String id) {
         return professorMapper.mapProfessorToDTO(professorRepository.getById(id));
     }
 
@@ -48,7 +56,6 @@ public class ProfessorService {
     }
 
     public void deleteProfessor(String id) {
-        Professor professorToDelete = professorRepository.getById(id);
-        professorRepository.deleteFromRepository(professorToDelete);
+        professorRepository.deleteFromRepository(id);
     }
 }

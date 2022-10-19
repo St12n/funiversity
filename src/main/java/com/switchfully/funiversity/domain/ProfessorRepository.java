@@ -31,7 +31,7 @@ public class ProfessorRepository {
         return professorsById.values();
     }
 
-    public void deleteFromRepository(Professor professor){
-        professorsById.remove(professor);
+    public void deleteFromRepository(String id){
+        professorsById.remove(id);
     }
 }
